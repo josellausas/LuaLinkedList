@@ -1,7 +1,8 @@
 package = "LinkedList"
 version = "1.0-1"
 source = {
-	url = "https://github.com/zunware/LuaLinkedList"
+	url = "https://github.com/zunware/LuaLinkedList",
+	tag = "1.0-1"
 }
 description = {
 	summary = "A Doubly-Linked List implementation",
