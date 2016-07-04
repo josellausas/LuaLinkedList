@@ -40,7 +40,7 @@ local function removeNode(list, node)
 
 	node.prev = nil
 	node.next = nil
-	node.data = nil
+	node:setData(nil)
 
 	list.count = list.count - 1
 end
@@ -175,7 +175,7 @@ function LinkedList:deleteAll()
 	local n = self.head
 	repeat
 		local nextNode = n.next
-		n.data = nil
+		n:setData(nil)
 		n.next = nil
 		n.prev = nil
 		self.count = self.count -1
@@ -202,7 +202,7 @@ function LinkedList:popFront()
 
 	self.count = self.count - 1
 
-	return wasHead.data
+	return wasHead:getData()
 end
 
 ----------------------------------------------------------------
@@ -222,7 +222,7 @@ function LinkedList:popBack()
 
 	self.count = self.count - 1
 
-	return wasTail.data
+	return wasTail:getData()
 end
 
 
@@ -235,8 +235,8 @@ function LinkedList:getDataArray()
 	local dataArray = {}
 	local node = self.head
 	while node ~= nil do
-		if(node.data ~= nil) then
-			table.insert(dataArray, node.data)
+		if(node:getData() ~= nil) then
+			table.insert(dataArray, node:getData())
 		else
 		    table.insert(dataArray, "[nil]")
 		end
@@ -254,8 +254,8 @@ function LinkedList:getDataArrayBackwards()
 	local dataArray = {}
 	local node = self.tail
 	while (node ~= nil) do
-		if(node.data ~= nil) then
-			table.insert(dataArray, node.data)
+		if(node:getData() ~= nil) then
+			table.insert(dataArray, node:getData())
 		else
 		    table.insert(dataArray, "[nil]")
 		end

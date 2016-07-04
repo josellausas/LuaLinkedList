@@ -15,7 +15,15 @@ local Node  = class('Node')
 function Node:initialize(data)
 	self.next = nil
 	self.prev = nil
-	self.data = data
+	-- Weak table references
+	self.ref  = {}
+	setmetatable(self.ref, { __mode = 'v' })
+	self.ref.data = data
+
+end
+
+function Node:setData(data)
+	self.ref.data = data
 end
 
 ---------------------------------------------------------------
@@ -42,7 +50,7 @@ end
 -- @return **(Node)** The data contained by this node
 ---------------------------------------------------------------
 function Node:getData()
-	return data
+	return self.ref.data
 end
 
 

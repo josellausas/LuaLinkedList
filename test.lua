@@ -12,7 +12,7 @@ describe('Linked List >', function()
 	describe('Nodes >', function()
 		it('should require Node', function()
 			-- Load Node
-			Node = require("LNode")
+			Node = require(".LNode")
 			assert.truthy(Node)
 		end)
 
@@ -83,16 +83,17 @@ describe('Linked List >', function()
 
 		it('should popBack', function()
 			local ll = LinkedList:new()
+			local label = "Borrado"
 			ll:pushBack("Datos")
 			ll:pushBack("Datos")
 			ll:pushBack("Datos")
-			ll:pushBack("Borrado")
-			assert.is_equal(ll.tail.data, "Borrado")
+			ll:pushBack(label)
+			assert.is_equal(ll.tail:getData(), "Borrado")
 			assert.is_equal(4, ll.count)
 			local nodeToPop = ll:popBack()
 			assert.is_equal(nodeToPop, "Borrado")
 			assert.is_equal(3, ll.count)
-			assert.is_equal(ll.tail.data, "Datos")
+			assert.is_equal(ll.tail:getData(), "Datos")
 		end)
 
 		it('should popFront', function()
@@ -180,7 +181,7 @@ describe('Linked List >', function()
 			local node = ll.head
 			local outputStringArray = {}
 			while(node ~= nil) do
-				table.insert(outputStringArray, node.data)
+				table.insert(outputStringArray, node:getData())
 				node = node.next
 			end
 
@@ -249,7 +250,7 @@ describe('Linked List >', function()
 			ll:removeFirst()
 
 			assert.is_equal(ll.count, 1)
-			assert.is_equal(ll.head.data, "Dos")
+			assert.is_equal(ll.head:getData(), "Dos")
 
 		end)
 
