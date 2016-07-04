@@ -1,13 +1,13 @@
 package = "LinkedList"
-version = "1.0-2"
+version = "1.0-3"
 source = {
 	url = "https://github.com/zunware/LuaLinkedList",
-	tag = "1.0-2"
+	tag = "1.0-3"
 }
 description = {
 	summary = "A Doubly-Linked List implementation",
 	detailed = [[
-		TODO
+		A doubly linked list for Lua. Requires middleclass. Work in progress...
 	]],
 	homepage = "http://josellausas.com",
 	license = "Apache 2.0"
@@ -20,6 +20,7 @@ build = {
 	type = "builtin",
 	modules = {
 		LinkedList = "LinkedList.lua",
+		LNode = "LNode.lua"
 	}
 	-- copy_directories = {"Docs"},
 }
