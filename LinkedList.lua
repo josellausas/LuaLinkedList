@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
 -- Doubly-linked List
 --
--- @module LinkedList
+-- @classmod LinkedList
 -- @author jose@josellausas.com
 -- @usage
 -- dll = LinkedList.new()
@@ -13,13 +13,23 @@ local Node = require('LNode')
 local LinkedList = {}
 LinkedList.__index = LinkedList
 
------------------------------------------------------
--- Removes a node from the list
+----------------------------------------------------------------
+-- Creates a new Doubly-linked List
+-- @constructor
 --
--- @function removeNode
--- @param list **(LinkedList)** The list to remove from
--- @param node **(LNode)** The node to remove
------------------------------------------------------
+-- @return **(LinkedList)** New LinkedList
+----------------------------------------------------------------
+function LinkedList.new()
+    local self = {}
+  self.head  = nil
+  self.tail  = nil
+  self.count = 0
+
+    setmetatable(self, LinkedList)
+    return self
+end
+
+-- Removes a node from the list
 local function removeNode(list, node)
 	local prevN = node.prev
 	local nextN = node.next
@@ -45,13 +55,7 @@ local function removeNode(list, node)
 	list.count = list.count - 1
 end
 
------------------------------------------------------
 -- Inserts a node before the reference
---
--- @function insertNodeBefore
--- @param node **(LNode)** The node to insert
--- @param referenceNode **(LNode)** The node to insert before to
------------------------------------------------------
 local function insertNodeBefore(list, node, referenceNode)
 	-- Setup the node
 	local before = referenceNode.prev
@@ -66,13 +70,7 @@ local function insertNodeBefore(list, node, referenceNode)
 end
 
 
------------------------------------------------------
 -- Inserts a node after the reference
---
--- @function insertNodeAfter
--- @param node **(LNode)** The node to insert
--- @param referenceNode **(LNode)** The node to insert after to
------------------------------------------------------
 local function insertNodeAfter(node, referenceNode)
 	local after = referenceNode.next
 
@@ -90,21 +88,6 @@ end
 
 local function insertNodeBetween(node, leftNode, rightNode)
 
-end
-
-----------------------------------------------------------------
--- Creates a new Doubly-linked List
---
--- @return **(LinkedList)** New LinkedList
-----------------------------------------------------------------
-function LinkedList.new()
-    local self = {}
-  self.head  = nil
-  self.tail  = nil
-  self.count = 0
-
-    setmetatable(self, LinkedList)
-    return self
 end
 
 ----------------------------------------------------------------
