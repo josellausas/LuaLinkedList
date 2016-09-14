@@ -17,9 +17,9 @@ describe('Linked List >', function()
 		end)
 
 		it('should create new nodes', function()
-			local n1 = Node:new(nil)
-			local n2 = Node:new(1)
-			local n3 = Node:new("Dos")
+			local n1 = Node.new(nil)
+			local n2 = Node.new(1)
+			local n3 = Node.new("Dos")
 
 			assert.truthy(n1)
 			assert.truthy(n2)
@@ -38,7 +38,7 @@ describe('Linked List >', function()
 		end)
 		
 		it('should create a new clean instance', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 			assert.truthy(ll)
 			assert.is_nil(ll.head)
 			assert.is_nil(ll.tail)
@@ -47,7 +47,7 @@ describe('Linked List >', function()
 		end)
 
 		it('should push back', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 			ll:pushBack("Hola")
 			assert.is_equal(1, ll.count)
 			assert.is_truthy(ll.head)
@@ -55,7 +55,7 @@ describe('Linked List >', function()
 		end)
 
 		it('should push front', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 			ll:pushFront("Hola")
 			assert.is_equal(1, ll.count)
 			assert.is_truthy(ll.head)
@@ -63,7 +63,7 @@ describe('Linked List >', function()
 		end)
 
 		it('should delete all', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 			ll:pushFront("Uno")
 			ll:pushFront("Dos")
 			ll:pushFront("Tres")
@@ -82,7 +82,7 @@ describe('Linked List >', function()
 		end)
 
 		it('should popBack', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 			local label = "Borrado"
 			ll:pushBack("Datos")
 			ll:pushBack("Datos")
@@ -97,7 +97,7 @@ describe('Linked List >', function()
 		end)
 
 		it('should popFront', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 			ll:pushBack("Uno")
 			ll:pushBack("dos")
 			ll:pushBack("last")
@@ -114,7 +114,7 @@ describe('Linked List >', function()
 		end)
 
 		it('shoudld count', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 
 			assert.is_equal(0, ll.count)
 
@@ -156,7 +156,7 @@ describe('Linked List >', function()
 		end)
 
 		it('should not remove empty lists', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 
 			local front = ll:popFront()
 			assert.is_nil(front)
@@ -172,7 +172,7 @@ describe('Linked List >', function()
 		it('should iterate forward', function()
 
 			local stringArray = {"Hola", " que", " hace", " como", " esta?"}
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 
 			for i, data in ipairs(stringArray) do
 				ll:pushBack(data)
@@ -202,7 +202,7 @@ describe('Linked List >', function()
 		it('should iterate backwards', function()
 			local forwardData = {"Hola", " que", " hace", " como", " esta?"}
 			local backwardData = {" esta?", " como", " hace", " que", "Hola" }
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 
 			for i, data in ipairs(forwardData) do
 				ll:pushBack(data)
@@ -218,7 +218,7 @@ describe('Linked List >', function()
 		end)
 
 		it('should remove last', function()
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 
 			ll:pushBack("Uno")
 			ll:pushBack("Dos")
@@ -242,7 +242,7 @@ describe('Linked List >', function()
 
 		it('should remove first', function()
 
-			local ll = LinkedList:new()
+			local ll = LinkedList.new()
 
 			ll:pushBack("Uno")
 			ll:pushBack("Dos")

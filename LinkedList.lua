@@ -4,14 +4,14 @@
 -- @module LinkedList
 -- @author jose@josellausas.com
 -- @usage
--- dll = LinkedList:new()
+-- dll = LinkedList.new()
 -- dll:pushBack("Some data")
 -- print(dll:popBack())
 ----------------------------------------------------------------
-local class = require ('middleclass')
 local Node = require('LNode')
 
-local LinkedList = class('LinkedList')
+local LinkedList = {}
+LinkedList.__index = LinkedList
 
 -----------------------------------------------------
 -- Removes a node from the list
@@ -94,11 +94,17 @@ end
 
 ----------------------------------------------------------------
 -- Creates a new Doubly-linked List
+--
+-- @return **(LinkedList)** New LinkedList
 ----------------------------------------------------------------
-function LinkedList:initialize()
-	self.head  = nil
-	self.tail  = nil
-	self.count = 0
+function LinkedList.new()
+    local self = {}
+  self.head  = nil
+  self.tail  = nil
+  self.count = 0
+
+    setmetatable(self, LinkedList)
+    return self
 end
 
 ----------------------------------------------------------------
@@ -134,7 +140,7 @@ end
 -- @param data **(any)** Any data to store in the list
 ----------------------------------------------------------------
 function LinkedList:pushBack(data)
-	local node = Node:new(data)
+	local node = Node.new(data)
 	if(self.head == nil) then
 		self.head = node
 		self.tail = node
@@ -152,7 +158,7 @@ end
 -- @param data **(any)** The data to store
 ----------------------------------------------------------------
 function LinkedList:pushFront(data)
-	local node = Node:new(data)
+	local node = Node.new(data)
 
 	if(self.head == nil)then
 		self.head = node

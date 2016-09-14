@@ -4,22 +4,27 @@
 -- @module Node
 -- @author jose@josellausas.com
 ---------------------------------------------------------------
-local class = require('middleclass')
-local Node  = class('Node')
+local Node  = {}
+Node.__index = Node
 
 ---------------------------------------------------------------
 -- Creates a new node containing the data
 --
 -- @param data **(any)** The data
+--
+-- @return **(Node)** New Node
 ---------------------------------------------------------------
-function Node:initialize(data)
-	self.next = nil
-	self.prev = nil
-	-- Weak table references
-	self.ref  = {}
-	setmetatable(self.ref, { __mode = 'v' })
-	self.ref.data = data
+function Node.new(data)
+  local self = {}
+  self.next = nil
+  self.prev = nil
+  -- Weak table references
+  self.ref  = {}
+  setmetatable(self.ref, { __mode = 'v' })
+  self.ref.data = data
 
+    setmetatable(self, Node)
+    return self
 end
 
 function Node:setData(data)
