@@ -1,25 +1,35 @@
 ----------------------------------------------------------------
 -- Doubly-linked List
 --
--- @module LinkedList
+-- @classmod LinkedList
 -- @author jose@josellausas.com
 -- @usage
--- dll = LinkedList:new()
+-- dll = LinkedList.new()
 -- dll:pushBack("Some data")
 -- print(dll:popBack())
 ----------------------------------------------------------------
-local class = require ('middleclass')
 local Node = require('LNode')
 
-local LinkedList = class('LinkedList')
+local LinkedList = {}
+LinkedList.__index = LinkedList
 
------------------------------------------------------
--- Removes a node from the list
+----------------------------------------------------------------
+-- Creates a new Doubly-linked List
+-- @constructor
 --
--- @function removeNode
--- @param list **(LinkedList)** The list to remove from
--- @param node **(LNode)** The node to remove
------------------------------------------------------
+-- @return **(LinkedList)** New LinkedList
+----------------------------------------------------------------
+function LinkedList.new()
+    local self = {}
+  self.head  = nil
+  self.tail  = nil
+  self.count = 0
+
+    setmetatable(self, LinkedList)
+    return self
+end
+
+-- Removes a node from the list
 local function removeNode(list, node)
 	local prevN = node.prev
 	local nextN = node.next
@@ -32,7 +42,7 @@ local function removeNode(list, node)
 	end
 
 	if(nextN ~= nil) then
-		nextN.prev = prev
+		nextN.prev = prevN
 	else
 	    -- The node was at the tail
 	    list.tail = prevN
@@ -43,62 +53,6 @@ local function removeNode(list, node)
 	node:setData(nil)
 
 	list.count = list.count - 1
-end
-
------------------------------------------------------
--- Inserts a node before the reference
---
--- @function insertNodeBefore
--- @param node **(LNode)** The node to insert
--- @param referenceNode **(LNode)** The node to insert before to
------------------------------------------------------
-local function insertNodeBefore(list, node, referenceNode)
-	-- Setup the node
-	local before = referenceNode.prev
-	if(before ~= nil) then
-		before.next = node
-	end
-	node.prev = before
-	node.next = referenceNode
-	referenceNode.prev = node
-
-	list.count = list.count + 1  
-end
-
-
------------------------------------------------------
--- Inserts a node after the reference
---
--- @function insertNodeAfter
--- @param node **(LNode)** The node to insert
--- @param referenceNode **(LNode)** The node to insert after to
------------------------------------------------------
-local function insertNodeAfter(node, referenceNode)
-	local after = referenceNode.next
-
-	if(after ~= nil) then
-		after.prev = node
-	end
-
-	node.next = after
-	node.prev = referenceNode
-
-	referenceNode.next = node
-
-end
-
-
-local function insertNodeBetween(node, leftNode, rightNode)
-
-end
-
-----------------------------------------------------------------
--- Creates a new Doubly-linked List
-----------------------------------------------------------------
-function LinkedList:initialize()
-	self.head  = nil
-	self.tail  = nil
-	self.count = 0
 end
 
 ----------------------------------------------------------------
@@ -134,7 +88,7 @@ end
 -- @param data **(any)** Any data to store in the list
 ----------------------------------------------------------------
 function LinkedList:pushBack(data)
-	local node = Node:new(data)
+	local node = Node.new(data)
 	if(self.head == nil) then
 		self.head = node
 		self.tail = node
@@ -152,7 +106,7 @@ end
 -- @param data **(any)** The data to store
 ----------------------------------------------------------------
 function LinkedList:pushFront(data)
-	local node = Node:new(data)
+	local node = Node.new(data)
 
 	if(self.head == nil)then
 		self.head = node
